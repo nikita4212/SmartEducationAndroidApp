@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">2020-04-10463</string>
+
+    <string-array name="year">
+        <item>FE</item>
+        <item>SE</item>
+        <item>TE</item>
+        <item>BE</item>
+    </string-array>
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/walpaper"
+    tools:context=".teacherhomepage">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="69dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="616dp"
+        android:fontFamily="@font/aclonica"
+        android:text="Smart Education"
+        android:textColor="#FFEB3B"
+        android:textSize="25sp"
+        app:layout_constraintVertical_bias="0.19" />
+
+    <Button
+        android:id="@+id/assupload"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="500dp"
+        android:text="Upload Assignement" />
+
+    <Button
+        android:id="@+id/notesupload"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="420dp"
+        android:text="Upload Notes" />
+
+    <Button
+        android:id="@+id/noticeupload"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="340dp"
+        android:text="Upload Notice"/>
+
+    <Button
+        android:id="@+id/timetableupload"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="260dp"
+        android:text="Upload Timetable"/>
+
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="163dp"
+        android:layout_marginBottom="70dp"
+        android:onClick="logout"
+        android:text="Logout" />
+</RelativeLayout>

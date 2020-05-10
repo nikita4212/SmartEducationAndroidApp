@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.smarteducation">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/logoimage"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Splashscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Books" />
+        <activity android:name=".studenthomepage" />
+        <activity android:name=".teacherhomepage" />
+        <activity android:name=".upload" />
+        <activity android:name=".adminpage" />
+        <activity android:name=".Assignment" />
+        <activity android:name=".Teacher" />
+        <activity android:name=".Login" />
+        <activity android:name=".upload1" />
+        <activity android:name=".upload2" />
+        <activity android:name=".studentprofile" />
+        <activity android:name=".Approve" />
+        <activity android:name=".upload3" />
+        <activity android:name=".Register"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>
