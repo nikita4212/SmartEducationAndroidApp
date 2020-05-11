@@ -7,4 +7,14 @@
         <item>TE</item>
         <item>BE</item>
     </string-array>
+
+    <string-array name="branch">
+        <item>Computer</item>
+        <item>IT</item>
+        <item>Civil</item>
+        <item>Mech</item>
+        <item>EnTC</item>
+        <item>Electrical</item>
+    </string-array>
+
 </resources>

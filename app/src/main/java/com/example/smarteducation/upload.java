@@ -12,11 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -36,14 +34,12 @@ public class upload extends AppCompatActivity implements View.OnClickListener, A
     DatabaseReference mref;
     private String mypath;
     private EditText fname;
-    private EditText  y,dep,sub,div,batch,type,assign_no;
-    private String my,mdep,msub,mdiv,mbatch,mtype,mfname;
-    private Spinner spinner;
+    private EditText  y,sub,div,batch,type,assign_no;
+    private String my,dep,mdep,msub,mdiv,mbatch,mtype,mfname;
+    private Spinner spinner,spinnerd;
     private static final String[] path = {"FE", "SE", "TE", "BE"};
     Uri filePath;
     String str="";
-    //HashMap<String,String> map=new HashMap<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,53 +47,47 @@ public class upload extends AppCompatActivity implements View.OnClickListener, A
         setContentView(R.layout.activity_upload);
         mfirebase=FirebaseDatabase.getInstance();
 
-        //mref.setValue("Hi");
         spinner = (Spinner) findViewById(R.id.Year);
+        spinnerd = (Spinner) findViewById(R.id.department);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.year));
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.branch));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-        //imageView=(ImageView) findViewById(R.id.imageView);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    my = parent.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerd.setAdapter(adapter1);
+        spinnerd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                dep = parent.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         buttonChoose = (Button) findViewById(R.id.buttonChoose);
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
-        dep = findViewById(R.id.department);
+
         sub   = findViewById(R.id.subject);
         batch      = findViewById(R.id.batch);
         //type=findViewById(R.id.type);
         fname=findViewById(R.id.fname);
         div = findViewById(R.id.div);
         assign_no=findViewById(R.id.assign_no);
-        //HashMap<String,String> map=new HashMap<>();
-       /* ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.department));
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dep.setAdapter(adapter);
-        dep.setOnItemSelectedListener(this);
-
-
-
-
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Division));
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        div.setAdapter(adapter);
-        div.setOnItemSelectedListener(this);
-
-
-
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.batch));
-        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        batch.setAdapter(adapter);
-        batch.setOnItemSelectedListener(this);
-
-
-        ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.type));
-        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        type.setAdapter(adapter);
-        type.setOnItemSelectedListener(this);
-
-*/
-
-
-        //  str = dep.getText() +"/"+sub.getText()+"/"+div.getText()+"/"+batch.getText()+"/"+fname.getText();
 
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
@@ -121,11 +111,11 @@ public class upload extends AppCompatActivity implements View.OnClickListener, A
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
             //map.put(assign_no.getText().toString(),fname.getText().toString());
-            mypath=my+"/"+(dep.getText().toString())+"/"+(div.getText().toString())+"/"+(batch.getText().toString())+"/"+("Assignments")+"/"+(sub.getText().toString())+"/"+(assign_no.getText().toString())+(fname.getText().toString());
+            mypath=my+"/"+(dep)+"/"+(div.getText().toString())+"/"+(batch.getText().toString())+"/"+("Assignments")+"/"+(sub.getText().toString())+"/"+(assign_no.getText().toString())+(fname.getText().toString());
             // Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
             //Toast.makeText(this,mypath,Toast.LENGTH_SHORT).show();
             mref=mfirebase.getReference(mypath);
-            final StorageReference riversRef = mStorageRef.child(((my)+("/")+(dep.getText().toString())+("/")+(div.getText().toString())+("/")+(batch.getText().toString())+("/")+("Assignments")+("/")+(sub.getText()
+            final StorageReference riversRef = mStorageRef.child(((my)+("/")+(dep)+("/")+(div.getText().toString())+("/")+(batch.getText().toString())+("/")+("Assignments")+("/")+(sub.getText()
             .toString())+("/")+(fname.getText().toString())+(".pdf")));
             //StorageReference riversRef = mStorageRef.child((new StringBuilder().append(str).toString()));
             riversRef.putFile(filePath)
@@ -176,24 +166,11 @@ public class upload extends AppCompatActivity implements View.OnClickListener, A
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
-            /*
-            try {
-                Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
-                imageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
         }
     }
 
     @Override
     public void onClick(View view) {
-        // mdep=dep.getText().toString().trim();
-        //msub=sub.getText().toString().trim();
-        //mtype=type.getText().toString().trim();
-        //mfname=fname.getText().toString().trim();
-        //mbatch=batch.getText().toString().trim();
-        //mdiv=div.getText().toString().trim();
         if (view == buttonChoose) {
             //open file chooser
             showFileChooser();
@@ -204,13 +181,17 @@ public class upload extends AppCompatActivity implements View.OnClickListener, A
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        my=adapterView.getSelectedItem().toString();
-        Toast.makeText(this,adapterView.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }
